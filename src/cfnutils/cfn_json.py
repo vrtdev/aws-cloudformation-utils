@@ -43,6 +43,10 @@ def cfn_json_dumps(structure):
             # Pass through unmodified
             return thing, params
 
+        elif thing is None:
+            # Pass through unmodified
+            return None, params
+
         elif isinstance(thing, dict):
             # Recurse down for keys & values
             _ = {}
@@ -82,6 +86,6 @@ def cfn_json_dumps(structure):
 
     structure, params = replace_objects(structure)
     if params == {}:
-        return structure
+        return json.dumps(structure)
     else:
         return troposphere.Sub(json.dumps(structure), **params)

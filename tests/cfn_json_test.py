@@ -4,12 +4,13 @@ from cfnutils.cfn_json import cfn_json_dumps
 
 
 def test_normal():
-    assert cfn_json_dumps("foo") == "foo"
-    assert cfn_json_dumps(True) == True
-    assert cfn_json_dumps(42) == 42
-    assert cfn_json_dumps({'foo': 'bar'}) == {'foo': "bar"}
-    assert cfn_json_dumps(['foo', 'bar']) == ['foo', "bar"]
-    assert cfn_json_dumps({'foo': ['bar', 42, True]}) == {'foo': ['bar', 42, True]}
+    assert cfn_json_dumps("foo") == '"foo"'
+    assert cfn_json_dumps(True) == 'true'
+    assert cfn_json_dumps(42) == '42'
+    assert cfn_json_dumps({'foo': 'bar'}) == '{"foo": "bar"}'
+    assert cfn_json_dumps(['foo', 'bar']) == '["foo", "bar"]'
+    assert cfn_json_dumps({'foo': ['bar', 42, True]}) == '{"foo": ["bar", 42, true]}'
+    assert cfn_json_dumps(None) == "null"
 
 
 def test_sub():
