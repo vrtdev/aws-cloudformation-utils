@@ -12,3 +12,4 @@ def test_hosted_zone_id():
     # take a few samples
     assert 'Z2FDTNDATAQYW2' == mapping['eu-west-1']['CloudFront']
     assert 'Z1H1FL5HABSF5' == mapping['us-west-2']['ElasticLoadBalancing']
+    assert 'Z3VO1THU9YC4UR' == mapping['ap-south-1']['APIGateway']
