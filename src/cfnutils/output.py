@@ -34,6 +34,13 @@ def write_template_to_file(template, template_suffix=''):
         calling_filename = None
     del frames  # Needed to avoid circular loops for garbage collection
 
+    # From the python 3.9 change log:
+    # Python now gets the absolute path of the script filename specified on the command line [...]
+    # As a side effect, the traceback also displays the absolute path for __main__ module frames in this case.
+    # Change: bpo-20443 https://bugs.python.org/issue20443
+    # We don't want that, so we convert to a relative path (if the path is already relative nothing happens)
+    calling_filename = os.path.relpath(calling_filename)
+
     build_info["built from"]["file"] = calling_filename
 
     try:
