@@ -46,15 +46,19 @@ def write_template_to_file(template, template_suffix=''):
     try:
         commit = subprocess.check_output(['git', 'rev-parse', 'HEAD']).strip().decode('utf-8')
         dirty = subprocess.check_output(['git', 'status', '--porcelain'])
+        origin = subprocess.check_output(['git', 'remote', 'get-url', 'origin'])
 
         build_info["built from"]["git info"] = commit
         if dirty != '':
             build_info["built from"]["git info"] += " DIRTY"
+        build_info["built from"]["origin"] = origin
 
     except subprocess.CalledProcessError as e:
-        build_info["built from"]["git info"] = "Git info could not be retreived"
+        build_info["built from"]["git info"] = "git info could not be retrieved"
+        build_info["built from"]["origin"] = "origin could not be retrieved"
 
     build_info["built on"] = socket.gethostname()
+    build_info["url"] = os.environ.get("BUILD_URL", "unknown url")
 
     try:
         build_info["built by"] = "{name} <{email}>".format(
