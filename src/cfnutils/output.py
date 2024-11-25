@@ -46,7 +46,7 @@ def write_template_to_file(template, template_suffix=''):
     try:
         commit = subprocess.check_output(['git', 'rev-parse', 'HEAD']).strip().decode('utf-8')
         dirty = subprocess.check_output(['git', 'status', '--porcelain'])
-        origin = subprocess.check_output(['git', 'remote', 'get-url', 'origin'])
+        origin = subprocess.check_output(['git', 'remote', 'get-url', 'origin']).strip().decode('utf-8')
 
         build_info["built from"]["git info"] = commit
         if dirty != '':
