@@ -35,3 +35,9 @@ extend-select = [
 
 [tool.ruff.lint.extend-per-file-ignores]
 "*/__init__.py" = ["D104"]
+
+[[tool.uv.index]]
+name = "nexus"
+url = "https://nexus.core.a51.be/repository/pypi/simple/"
+publish-url = "https://nexus.core.a51.be/repository/vrt-pypi/"
+default = true
