@@ -1,7 +1,9 @@
 /venv
+/.venv
 /.cache
 /.idea
 /.eggs
+/build
 
 *.pyc
 *.pyo
